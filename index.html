@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Mentalista - The Pink Edition</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        pink: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            200: '#fbcfe8',
+                            300: '#f9a8d4',
+                            400: '#f472b6',
+                            500: '#ec4899',
+                            600: '#db2777',
+                            700: '#be185d',
+                            800: '#9d174d',
+                            900: '#831843',
+                            950: '#500724',
+                        },
+                        redjohn: '#800020'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,800;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d0208;
+            color: #fce7f3;
+        }
+
+        .font-serif-title {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Glassmorphism styling */
+        .glass-card {
+            background: rgba(255, 192, 203, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(244, 114, 182, 0.2);
+        }
+
+        .glass-card-hover:hover {
+            background: rgba(255, 192, 203, 0.1);
+            border-color: rgba(236, 72, 153, 0.5);
+            box-shadow: 0 10px 30px -10px rgba(236, 72, 153, 0.3);
+        }
+
+        /* Pink Glowing effects */
+        .glow-pink {
+            text-shadow: 0 0 15px rgba(236, 72, 153, 0.6), 0 0 30px rgba(219, 39, 119, 0.4);
+        }
+
+        .glow-box-pink {
+            box-shadow: 0 0 25px rgba(236, 72, 153, 0.25);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0d0208;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #be185d;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ec4899;
+        }
+
+        /* Animated smiley pulse */
+        @keyframes subtlePulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05); }
+        }
+
+        .pulse-smiley {
+            animation: subtlePulse 4s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-[#0d0208] text-pink-100 min-h-screen flex flex-col selection:bg-pink-600 selection:text-white">
+
+    <header class="sticky top-0 z-50 bg-[#0d0208]/80 backdrop-blur-md border-b border-pink-900/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-pink-600 to-rose-400 flex items-center justify-center text-white font-bold text-xl shadow-lg group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-eye text-pink-950"></i>
+                </div>
+                <div>
+                    <span class="font-serif-title text-2xl font-bold tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-rose-500">
+                        O MENTALISTA
+                    </span>
+                    <span class="block text-[10px] tracking-widest text-pink-400 uppercase font-semibold">Pink Fan Edition</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#sobre" class="hover:text-pink-400 transition-colors">Sobre</a>
+                <a href="#personagens" class="hover:text-pink-400 transition-colors">Personagens</a>
+                <a href="#truque" class="text-pink-400 font-semibold hover:text-pink-300 flex items-center gap-1">
+                    <i class="fa-solid fa-wand-magic-sparkles text-xs"></i> Mini-Jogo
+                </a>
+                <a href="#redjohn" class="hover:text-pink-400 transition-colors">Red John</a>
+                <a href="#tecnicas" class="hover:text-pink-400 transition-colors">Mentalismo</a>
+                <a href="#quiz" class="hover:text-pink-400 transition-colors">Quiz</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-pink-300 hover:text-white focus:outline-none p-2">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#15040f] border-b border-pink-900/50 px-4 pt-2 pb-6 space-y-3">
+            <a href="#sobre" class="block py-2 text-pink-200 hover:text-pink-400 font-medium">Sobre a Série</a>
+            <a href="#personagens" class="block py-2 text-pink-200 hover:text-pink-400 font-medium">Personagens</a>
+            <a href="#truque" class="block py-2 text-pink-400 hover:text-pink-300 font-semibold">Mini-Jogo do Jane</a>
+            <a href="#redjohn" class="block py-2 text-pink-200 hover:text-pink-400 font-medium">Red John</a>
+            <a href="#tecnicas" class="block py-2 text-pink-200 hover:text-pink-400 font-medium">Técnicas de Mentalismo</a>
+            <a href="#quiz" class="block py-2 text-pink-200 hover:text-pink-400 font-medium">Quiz do Fã</a>
+        </div>
+    </header>
+
+    <main class="flex-grow">
+        <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden py-20">
+            <!-- Background Gradients -->
+            <div class="absolute inset-0 bg-gradient-to-b from-pink-950/20 via-[#0d0208] to-[#0d0208] z-0"></div>
+            <div class="absolute -top-40 -left-40 w-96 h-96 bg-pink-600/20 rounded-full filter blur-[120px] pointer-events-none"></div>
+            <div class="absolute -bottom-40 -right-40 w-96 h-96 bg-rose-700/20 rounded-full filter blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                <div class="space-y-6 text-center md:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-950/60 border border-pink-500/30 text-pink-300 text-xs font-semibold tracking-wider uppercase">
+                        <i class="fa-solid fa-mug-hot text-pink-400"></i>
+                        <span>"Não existem videntes de verdade"</span>
+                    </div>
+                    
+                    <h1 class="font-serif-title text-4xl sm:text-6xl font-extrabold leading-tight tracking-wide">
+                        A mente vê o que a <span class="text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-rose-400 to-pink-600 glow-pink">razão oculta.</span>
+                    </h1>
+
+                    <p class="text-pink-200/80 text-lg sm:text-xl font-light leading-relaxed max-w-xl">
+                        Entre no universo enigmático de **Patrick Jane**, o consultor da CBI que usa observação afiada, psicologia e truques de ilusão para desvendar os crimes mais complexos e caçar seu arquinimigo, Red John.
+                    </p>
+
+                    <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                        <a href="#truque" class="px-8 py-4 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white font-semibold shadow-lg shadow-pink-600/30 hover:shadow-pink-600/50 hover:scale-105 transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-brain"></i>
+                            <span>Desafie o Mentalista</span>
+                        </a>
+                        <a href="#sobre" class="px-8 py-4 rounded-xl glass-card text-pink-200 font-semibold hover:bg-pink-900/30 border border-pink-500/30 transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Explorar a Série</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Graphic Illustration -->
+                <div class="relative flex justify-center items-center">
+                    <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full bg-gradient-to-br from-pink-900/30 to-rose-950/40 border border-pink-500/30 flex items-center justify-center p-8 backdrop-blur-md shadow-2xl">
+                        <!-- Red John style face motif reimagined in pink line art -->
+                        <svg class="w-full h-full text-pink-500/80 pulse-smiley" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="100" cy="100" r="85" stroke="currentColor" stroke-width="4" stroke-dasharray="8 6"/>
+                            <!-- Eyes -->
+                            <circle cx="70" cy="75" r="8" fill="currentColor" />
+                            <circle cx="130" cy="75" r="8" fill="currentColor" />
+                            <!-- Iconic Smile Curve -->
+                            <path d="M 50 120 Q 100 170 150 120" stroke="currentColor" stroke-width="6" stroke-linecap="round" fill="none" />
+                            <path d="M 145 115 Q 160 120 155 135" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none" />
+                        </svg>
+
+                        <!-- Floating Tea Cup Badge -->
+                        <div class="absolute -bottom-2 -left-2 glass-card p-4 rounded-2xl flex items-center gap-3 border border-pink-400/30 shadow-xl">
+                            <div class="w-12 h-12 rounded-xl bg-pink-600/30 flex items-center justify-center text-pink-300 text-2xl">
+                                <i class="fa-solid fa-mug-hot"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-pink-300 uppercase">Hábito Inconfundível</h4>
+                                <p class="text-sm font-semibold text-white">Chá Quente & Observação</p>
+                            </div>
+                        </div>
+
+                        <!-- Floating Couch Badge -->
+                        <div class="absolute -top-2 -right-2 glass-card p-4 rounded-2xl flex items-center gap-3 border border-pink-400/30 shadow-xl">
+                            <div class="w-12 h-12 rounded-xl bg-rose-600/30 flex items-center justify-center text-rose-300 text-2xl">
+                                <i class="fa-solid fa-couch"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-rose-300 uppercase">Sótão da CBI</h4>
+                                <p class="text-sm font-semibold text-white">O Sofá de Jane</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="truque" class="py-20 relative bg-gradient-to-b from-[#0d0208] via-[#170512] to-[#0d0208]">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <span class="text-pink-400 font-semibold tracking-wider text-sm uppercase">Experiência Interativa</span>
+                    <h2 class="font-serif-title text-3xl sm:text-5xl font-bold mt-2 text-white">
+                        O Truque de Leitura de Mente do Jane
+                    </h2>
+                    <p class="text-pink-200/70 mt-4 text-base sm:text-lg">
+                        Pense em um número e deixe o algoritmo de indução psicológica revelar o que está na sua cabeça.
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-3xl p-6 sm:p-10 border border-pink-500/30 shadow-2xl relative overflow-hidden">
+                    <!-- Subtle decorative background -->
+                    <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-pink-600/10 rounded-full filter blur-3xl pointer-events-none"></div>
+
+                    <div id="game-step-1" class="text-center space-y-6">
+                        <div class="w-20 h-20 mx-auto rounded-2xl bg-pink-900/40 border border-pink-500/40 flex items-center justify-center text-3xl text-pink-300">
+                            <i class="fa-solid fa-lightbulb"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Passo 1: Escolha um número secreto</h3>
+                        <p class="text-pink-200/80 max-w-lg mx-auto">
+                            Pense em qualquer número de **10 a 99**. Não me diga qual é!
+                        </p>
+                        <button id="btn-next-1" class="px-8 py-3.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-semibold transition-all shadow-lg shadow-pink-600/30">
+                            Já pensei, próximo passo <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <div id="game-step-2" class="hidden text-center space-y-6">
+                        <div class="w-20 h-20 mx-auto rounded-2xl bg-pink-900/40 border border-pink-500/40 flex items-center justify-center text-3xl text-pink-300">
+                            <i class="fa-solid fa-calculator"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Passo 2: Faça uma matemática simples</h3>
+                        <div class="bg-pink-950/50 p-6 rounded-2xl border border-pink-800/50 max-w-md mx-auto text-left space-y-3">
+                            <p class="text-pink-200 text-sm">1. Somes os dois dígitos do seu número. (Exemplo: se for **54**, faça 5 + 4 = **9**).</p>
+                            <p class="text-pink-200 text-sm">2. Subtraia essa soma do seu número original. (Exemplo: **54 - 9 = 45**).</p>
+                        </div>
+                        <p class="text-pink-300 font-medium">Guarde o resultado final na sua cabeça!</p>
+                        <button id="btn-next-2" class="px-8 py-3.5 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-semibold transition-all shadow-lg shadow-pink-600/30">
+                            Fiz a conta! Ver a tabela <i class="fa-solid fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
+
+                    <div id="game-step-3" class="hidden text-center space-y-6">
+                        <h3 class="text-2xl font-bold text-white">Passo 3: Procure seu resultado final na tabela abaixo</h3>
+                        <p class="text-pink-200/80 text-sm">Mantenha o símbolo correspondente ao seu número em mente e encare o olho de Jane...</p>
+
+                        <!-- Symbol Table Grid -->
+                        <div id="symbols-grid" class="grid grid-cols-5 sm:grid-cols-10 gap-2 p-4 bg-pink-950/40 rounded-2xl border border-pink-900/50 max-h-60 overflow-y-auto text-xs sm:text-sm">
+                            <!-- Populated via JS -->
+                        </div>
+
+                        <button id="btn-reveal" class="px-8 py-4 rounded-xl bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-400 hover:to-rose-500 text-white font-bold text-lg transition-all shadow-xl shadow-pink-600/40 glow-box-pink">
+                            <i class="fa-solid fa-eye mr-2"></i> Patrick Jane, leia minha mente!
+                        </button>
+                    </div>
+
+                    <div id="game-result" class="hidden text-center space-y-6 py-6">
+                        <div class="relative inline-block">
+                            <div class="w-28 h-28 mx-auto rounded-3xl bg-gradient-to-tr from-pink-600 to-rose-500 flex items-center justify-center text-5xl text-white shadow-2xl animate-bounce">
+                                <span id="revealed-symbol">🔮</span>
+                            </div>
+                        </div>
+                        <h3 class="text-3xl font-serif-title font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-300 via-pink-400 to-rose-400">
+                            O seu símbolo é este!
+                        </h3>
+                        <p class="text-pink-200/80 max-w-md mx-auto italic text-sm">
+                            "A linguagem corporal não mente, e as microexpressões na sua mente entregaram tudo." — Patrick Jane
+                        </p>
+                        <div>
+                            <button id="btn-restart-game" class="px-6 py-2.5 rounded-xl border border-pink-500/40 text-pink-300 hover:bg-pink-900/30 transition-all text-sm font-semibold">
+                                <i class="fa-solid fa-rotate-right mr-2"></i> Tentar Novamente
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="py-20 relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <span class="text-pink-400 font-semibold tracking-wider text-sm uppercase">A premissa da série</span>
+                        <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-white leading-tight">
+                            Observação, manipulação e uma busca incansável por vingança.
+                        </h2>
+                        <p class="text-pink-200/80 leading-relaxed">
+                            **O Mentalista** segue a vida de **Patrick Jane**, um antigo "vidente" charlatão que sofreu uma tragédia devastadora: sua esposa e filha foram assassinadas pelo serial killer **Red John** após Jane zombá-lo em um programa de TV.
+                        </p>
+                        <p class="text-pink-200/80 leading-relaxed">
+                            Arrependido e focado em vingança, Jane une forças como consultor da **CBI (California Bureau of Investigation)** ao lado da sênior **Teresa Lisbon**. Com seu charme excêntrico, poder de dedução e total desrespeito às regras, ele resolve casos impossíveis enquanto persegue as sombras do passado.
+                        </p>
+
+                        <div class="grid grid-cols-2 gap-4 pt-4">
+                            <div class="glass-card p-4 rounded-2xl border-l-4 border-l-pink-500">
+                                <h4 class="text-2xl font-bold text-pink-300">7</h4>
+                                <p class="text-xs text-pink-200/70 uppercase tracking-wider mt-1">Temporadas Clássicas</p>
+                            </div>
+                            <div class="glass-card p-4 rounded-2xl border-l-4 border-l-rose-500">
+                                <h4 class="text-2xl font-bold text-rose-300">151</h4>
+                                <p class="text-xs text-pink-200/70 uppercase tracking-wider mt-1">Episódios Enigmáticos</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Highlight Card -->
+                    <div class="glass-card rounded-3xl p-8 border border-pink-500/20 relative">
+                        <div class="absolute -top-5 -right-5 w-16 h-16 bg-pink-600 rounded-2xl flex items-center justify-center text-white text-2xl shadow-lg rotate-12">
+                            <i class="fa-solid fa-quote-left"></i>
+                        </div>
+                        <h3 class="font-serif-title text-2xl font-bold text-pink-200 mb-4">O que faz um Mentalista?</h3>
+                        <blockquote class="text-pink-100/90 italic space-y-3 text-sm sm:text-base leading-relaxed">
+                            "Alguém que utiliza de agudeza mental, hipnose e/ou sugestão. Um mestre na manipulação do pensamento e do comportamento."
+                        </blockquote>
+                        <div class="mt-6 pt-6 border-t border-pink-900/40 flex items-center justify-between">
+                            <span class="text-xs text-pink-400 font-semibold uppercase">Definição de Abertura</span>
+                            <span class="text-xs text-pink-300/60">CBI Archives</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="personagens" class="py-20 bg-[#12030d]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-pink-400 font-semibold tracking-wider text-sm uppercase">A Equipe da CBI</span>
+                    <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-white mt-2">
+                        Personagens Inesquecíveis
+                    </h2>
+                    <p class="text-pink-200/70 mt-4">
+                        Conheça a equipe responsável por manter a ordem enquanto lidam com as loucuras de Patrick Jane.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Character 1: Patrick Jane -->
+                    <div class="glass-card glass-card-hover rounded-3xl p-6 transition-all duration-300 group">
+                        <div class="w-full h-48 rounded-2xl bg-gradient-to-tr from-pink-900 to-rose-700 flex items-center justify-center relative overflow-hidden mb-6">
+                            <i class="fa-solid fa-user-secret text-7xl text-pink-200/40 group-hover:scale-110 transition-transform duration-500"></i>
+                            <span class="absolute top-3 right-3 bg-pink-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Consultor</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">Patrick Jane</h3>
+                        <p class="text-xs text-pink-400 font-medium mb-3">Ex-Psíquico / Consultor Especial</p>
+                        <p class="text-sm text-pink-200/70 leading-relaxed mb-4">
+                            Brilhante, sarcástico e observador nato. Usa truques de ilusão, leitura fria e empatia afiada para capturar criminosos.
+                        </p>
+                        <div class="text-xs text-pink-300 bg-pink-950/50 p-2.5 rounded-xl border border-pink-900/40">
+                            <strong>Marca registrada:</strong> Colete de terno, xícara de chá e o sofá do escritório.
+                        </div>
+                    </div>
+
+                    <!-- Character 2: Teresa Lisbon -->
+                    <div class="glass-card glass-card-hover rounded-3xl p-6 transition-all duration-300 group">
+                        <div class="w-full h-48 rounded-2xl bg-gradient-to-tr from-pink-950 to-rose-900 flex items-center justify-center relative overflow-hidden mb-6">
+                            <i class="fa-solid fa-shield-halved text-7xl text-pink-200/40 group-hover:scale-110 transition-transform duration-500"></i>
+                            <span class="absolute top-3 right-3 bg-rose-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Líder</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">Teresa Lisbon</h3>
+                        <p class="text-xs text-pink-400 font-medium mb-3">Agente Sênior da CBI</p>
+                        <p class="text-sm text-pink-200/70 leading-relaxed mb-4">
+                            Líder rigorosa, ética e extremamente protetora com sua equipe. É a única capaz de impor limites a Patrick Jane.
+                        </p>
+                        <div class="text-xs text-pink-300 bg-pink-950/50 p-2.5 rounded-xl border border-pink-900/40">
+                            <strong>Marca registrada:</strong> Cruz no pescoço e paciência infinita com Jane.
+                        </div>
+                    </div>
+
+                    <!-- Character 3: Kimball Cho -->
+                    <div class="glass-card glass-card-hover rounded-3xl p-6 transition-all duration-300 group">
+                        <div class="w-full h-48 rounded-2xl bg-gradient-to-tr from-purple-950 to-pink-900 flex items-center justify-center relative overflow-hidden mb-6">
+                            <i class="fa-solid fa-user-shield text-7xl text-pink-200/40 group-hover:scale-110 transition-transform duration-500"></i>
+                            <span class="absolute top-3 right-3 bg-purple-600 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Interrogatório</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">Kimball Cho</h3>
+                        <p class="text-xs text-pink-400 font-medium mb-3">Agente Especial</p>
+                        <p class="text-sm text-pink-200/70 leading-relaxed mb-4">
+                            Inexpressivo, direto ao ponto e imperturbável nos interrogatórios. Um dos personagens mais durões e leais do grupo.
+                        </p>
+                        <div class="text-xs text-pink-300 bg-pink-950/50 p-2.5 rounded-xl border border-pink-900/40">
+                            <strong>Marca registrada:</strong> Expressão inabalável e frases curtas e afiadas.
+                        </div>
+                    </div>
+
+                    <!-- Character 4: Wayne Rigsby -->
+                    <div class="glass-card glass-card-hover rounded-3xl p-6 transition-all duration-300 group">
+                        <div class="w-full h-48 rounded-2xl bg-gradient-to-tr from-pink-900 to-amber-950 flex items-center justify-center relative overflow-hidden mb-6">
+                            <i class="fa-solid fa-fire text-7xl text-pink-200/40 group-hover:scale-110 transition-transform duration-500"></i>
+                            <span class="absolute top-3 right-3 bg-pink-700 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Incêndios</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">Wayne Rigsby</h3>
+                        <p class="text-xs text-pink-400 font-medium mb-3">Especialista em Incêndios Criminais</p>
+                        <p class="text-sm text-pink-200/70 leading-relaxed mb-4">
+                            Forte e ágil no campo, mas com um coração enorme e uma fraqueza incurável por comida e por Grace Van Pelt.
+                        </p>
+                        <div class="text-xs text-pink-300 bg-pink-950/50 p-2.5 rounded-xl border border-pink-900/40">
+                            <strong>Marca registrada:</strong> Comendo lanches na cena do crime.
+                        </div>
+                    </div>
+
+                    <!-- Character 5: Grace Van Pelt -->
+                    <div class="glass-card glass-card-hover rounded-3xl p-6 transition-all duration-300 group">
+                        <div class="w-full h-48 rounded-2xl bg-gradient-to-tr from-rose-950 to-pink-900 flex items-center justify-center relative overflow-hidden mb-6">
+                            <i class="fa-solid fa-laptop-code text-7xl text-pink-200/40 group-hover:scale-110 transition-transform duration-500"></i>
+                            <span class="absolute top-3 right-3 bg-pink-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Tecnologia</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-pink-300 transition-colors">Grace Van Pelt</h3>
+                        <p class="text-xs text-pink-400 font-medium mb-3">Membro Recruta / Pesquisa</p>
+                        <p class="text-sm text-pink-200/70 leading-relaxed mb-4">
+                            Especialista em tecnologia e análises digitais. Racional, porém crente no sobrenatural, o que gera debates constantes com Jane.
+                        </p>
+                        <div class="text-xs text-pink-300 bg-pink-950/50 p-2.5 rounded-xl border border-pink-900/40">
+                            <strong>Marca registrada:</strong> Otimismo e crença no destino.
+                        </div>
+                    </div>
+
+                    <!-- Character 6: Red John -->
+                    <div class="glass-card glass-card-hover rounded-3xl p-6 transition-all duration-300 group border-redjohn/40">
+                        <div class="w-full h-48 rounded-2xl bg-gradient-to-tr from-stone-900 via-pink-950 to-redjohn flex items-center justify-center relative overflow-hidden mb-6">
+                            <i class="fa-solid fa-mask text-7xl text-rose-300/30 group-hover:scale-110 transition-transform duration-500"></i>
+                            <span class="absolute top-3 right-3 bg-rose-900 text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Nêmesis</span>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white group-hover:text-rose-400 transition-colors">Red John</h3>
+                        <p class="text-xs text-rose-400 font-medium mb-3">Serial Killer Metódico</p>
+                        <p class="text-sm text-pink-200/70 leading-relaxed mb-4">
+                            O assassino em série calculista e narcisista com uma rede secreta de cúmplices infiltrava todas as instâncias da lei.
+                        </p>
+                        <div class="text-xs text-rose-300 bg-rose-950/50 p-2.5 rounded-xl border border-rose-900/40">
+                            <strong>Marca registrada:</strong> O sorriso desenhado com o sangue da vítima.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="redjohn" class="py-20 relative bg-gradient-to-b from-[#0d0208] via-[#1c020d] to-[#0d0208]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <span class="text-rose-400 font-semibold tracking-wider text-sm uppercase">O Maior Enigma</span>
+                        <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-white mt-2 leading-tight">
+                            "Tyger Tyger, burning bright..."
+                        </h2>
+                        <p class="text-pink-200/80 mt-6 leading-relaxed">
+                            A obsessão de Patrick Jane por Red John atravessou seis temporadas. Red John não era apenas um assassino, mas o líder da **Associação Blake**, uma sociedade secreta de policiais, juízes e agentes corruptos que usavam a senha "Tyger, Tyger" (do poema de William Blake).
+                        </p>
+
+                        <div class="mt-8 space-y-4">
+                            <div class="glass-card p-4 rounded-2xl flex items-start gap-4 border border-pink-500/20">
+                                <div class="w-10 h-10 rounded-xl bg-pink-900/50 flex items-center justify-center text-pink-300 font-bold shrink-0">
+                                    1
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white text-base">A Lista dos 7 Suspeitos</h4>
+                                    <p class="text-xs text-pink-200/70 mt-1">No final da 5ª temporada, Jane reduz seus suspeitos a apenas 7 nomes usando pura dedução.</p>
+                                </div>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-2xl flex items-start gap-4 border border-pink-500/20">
+                                <div class="w-10 h-10 rounded-xl bg-pink-900/50 flex items-center justify-center text-pink-300 font-bold shrink-0">
+                                    2
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white text-base">A Tatuagem dos Três Pontos</h4>
+                                    <p class="text-xs text-pink-200/70 mt-1">A marca no ombro esquerdo que identificava os membros corruptos da Associação Blake.</p>
+                                </div>
+                            </div>
+
+                            <div class="glass-card p-4 rounded-2xl flex items-start gap-4 border border-pink-500/20">
+                                <div class="w-10 h-10 rounded-xl bg-pink-900/50 flex items-center justify-center text-pink-300 font-bold shrink-0">
+                                    3
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-white text-base">O Desfecho na Capela</h4>
+                                    <p class="text-xs text-pink-200/70 mt-1">O confronto final no episódio 8 da 6ª temporada, encerrando anos de caçada.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Suspect List Widget -->
+                    <div class="glass-card p-6 sm:p-8 rounded-3xl border border-rose-500/30">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="font-serif-title text-xl font-bold text-white">Os 7 Suspeitos Finais</h3>
+                            <span class="text-xs bg-rose-950 text-rose-300 px-3 py-1 rounded-full border border-rose-800">CBI File #007</span>
+                        </div>
+
+                        <div class="space-y-3" id="suspects-container">
+                            <!-- Populated with JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tecnicas" class="py-20 bg-[#12030d]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="text-pink-400 font-semibold tracking-wider text-sm uppercase">Segredos de Jane</span>
+                    <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-white mt-2">
+                        Técnicas de Mentalismo
+                    </h2>
+                    <p class="text-pink-200/70 mt-4">
+                        Como Patrick Jane lê pessoas como se fossem livros abertos sem usar nada mágico.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="glass-card p-6 rounded-3xl border border-pink-500/20">
+                        <div class="w-12 h-12 rounded-2xl bg-pink-600/20 text-pink-300 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-magnifying-glass"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Leitura Fria (Cold Reading)</h3>
+                        <p class="text-sm text-pink-200/70 leading-relaxed">
+                            Observar detalhes sutis — sapatos gastos, aliança ausente, postura das mãos — para deduzir a profissão, hábitos e segredos da pessoa em segundos.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-3xl border border-pink-500/20">
+                        <div class="w-12 h-12 rounded-2xl bg-rose-600/20 text-rose-300 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Indução & Sugestão (Priming)</h3>
+                        <p class="text-sm text-pink-200/70 leading-relaxed">
+                            Implantar palavras, cores ou imagens imperceptíveis na conversa minutos antes, fazendo a pessoa tomar uma "decisão livre" pré-determinada por Jane.
+                        </p>
+                    </div>
+
+                    <div class="glass-card p-6 rounded-3xl border border-pink-500/20">
+                        <div class="w-12 h-12 rounded-2xl bg-pink-600/20 text-pink-300 flex items-center justify-center text-2xl mb-4">
+                            <i class="fa-solid fa-spiral"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-2">Hipnose Rápida</h3>
+                        <p class="text-sm text-pink-200/70 leading-relaxed">
+                            Quebrar o padrão de atenção da pessoa com toques suaves ou perguntas desconcertantes para colocar o indivíduo em um estado de transe receptivo.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Quotes Carousel -->
+                <div class="mt-16 glass-card p-8 rounded-3xl border border-pink-500/30 max-w-4xl mx-auto text-center relative">
+                    <i class="fa-solid fa-quote-left text-4xl text-pink-500/20 mb-4 block"></i>
+                    <p id="quote-text" class="text-xl sm:text-2xl font-serif-title italic text-pink-100 mb-4">
+                        "Se você parar de tentar controlar tudo e apenas observar, as respostas aparecem sozinhos."
+                    </p>
+                    <span id="quote-author" class="text-sm font-semibold text-pink-400 uppercase tracking-widest">— Patrick Jane</span>
+                    
+                    <div class="mt-6 flex justify-center gap-3">
+                        <button id="prev-quote" class="w-10 h-10 rounded-full bg-pink-900/40 border border-pink-500/30 text-pink-300 hover:bg-pink-600 hover:text-white transition-all flex items-center justify-center">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <button id="next-quote" class="w-10 h-10 rounded-full bg-pink-900/40 border border-pink-500/30 text-pink-300 hover:bg-pink-600 hover:text-white transition-all flex items-center justify-center">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quiz" class="py-20 relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <span class="text-pink-400 font-semibold tracking-wider text-sm uppercase">Desafio para Fãs</span>
+                    <h2 class="font-serif-title text-3xl sm:text-5xl font-bold text-white mt-2">
+                        Quiz do Mentalista
+                    </h2>
+                    <p class="text-pink-200/70 mt-4">
+                        Será que suas habilidades de observação são dignas de Patrick Jane?
+                    </p>
+                </div>
+
+                <div class="glass-card rounded-3xl p-6 sm:p-10 border border-pink-500/30 shadow-2xl" id="quiz-container">
+                    <div id="quiz-intro" class="text-center space-y-6">
+                        <div class="w-20 h-20 mx-auto rounded-3xl bg-pink-600/30 border border-pink-500/40 flex items-center justify-center text-4xl text-pink-300">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white">Pronto para testar sua memória?</h3>
+                        <p class="text-pink-200/80 max-w-md mx-auto text-sm">
+                            Responda a 5 perguntas sobre os mistérios, personagens e detalhes marcantes de O Mentalista.
+                        </p>
+                        <button id="btn-start-quiz" class="px-8 py-3.5 rounded-xl bg-gradient-to-r from-pink-600 to-rose-600 text-white font-bold hover:scale-105 transition-all shadow-lg shadow-pink-600/40">
+                            Iniciar Quiz
+                        </button>
+                    </div>
+
+                    <div id="quiz-body" class="hidden space-y-6">
+                        <div class="flex justify-between items-center text-xs text-pink-300 font-medium pb-4 border-b border-pink-900/40">
+                            <span id="quiz-progress">Pergunta 1 de 5</span>
+                            <span id="quiz-score-live">Pontos: 0</span>
+                        </div>
+
+                        <h3 id="quiz-question" class="text-xl sm:text-2xl font-bold text-white">
+                            <!-- Question text -->
+                        </h3>
+
+                        <div id="quiz-options" class="space-y-3">
+                            <!-- Option buttons injected here -->
+                        </div>
+                    </div>
+
+                    <div id="quiz-results" class="hidden text-center space-y-6">
+                        <div class="w-24 h-24 mx-auto rounded-full bg-pink-600/30 border-2 border-pink-400 flex items-center justify-center text-4xl text-pink-200">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-3xl font-serif-title font-bold text-white">Resultado Final</h3>
+                        <p id="quiz-score-text" class="text-2xl font-bold text-pink-300">
+                            Você acertou 0 de 5!
+                        </p>
+                        <p id="quiz-feedback" class="text-pink-200/80 max-w-md mx-auto text-sm">
+                            <!-- Feedback statement -->
+                        </p>
+                        <button id="btn-restart-quiz" class="px-8 py-3 rounded-xl bg-pink-600 hover:bg-pink-500 text-white font-semibold transition-all">
+                            Tentar Novamente
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#080105] border-t border-pink-900/40 py-12 text-pink-400/80 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-3">
+                <div class="w-8 h-8 rounded-full bg-pink-600 flex items-center justify-center text-white font-bold text-sm">
+                    <i class="fa-solid fa-eye text-pink-950"></i>
+                </div>
+                <span class="font-serif-title text-lg font-bold text-pink-200">O MENTALISTA</span>
+            </div>
+
+            <p class="text-xs text-pink-300/60 text-center">
+                Site de fã sem fins lucrativos dedicado à série <span class="text-pink-300">The Mentalist (CBS)</span>.
+            </p>
+
+            <div class="flex items-center space-x-4 text-pink-400">
+                <a href="#sobre" class="hover:text-pink-200 transition-colors">Início</a>
+                <a href="#personagens" class="hover:text-pink-200 transition-colors">Personagens</a>
+                <a href="#truque" class="hover:text-pink-200 transition-colors">Mini-Jogo</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom Notification Toast -->
+    <div id="toast" class="fixed bottom-5 right-5 glass-card bg-pink-950/90 text-pink-100 px-5 py-3 rounded-2xl border border-pink-500/40 shadow-2xl flex items-center gap-3 translate-y-24 opacity-0 transition-all duration-300 z-50">
+        <i class="fa-solid fa-circle-info text-pink-400 text-lg"></i>
+        <span id="toast-message" class="text-sm">Mensagem do Jane...</span>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile Menu Toggle
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu on click
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
+            // Toast helper
+            function showToast(msg) {
+                const toast = document.getElementById('toast');
+                const toastMsg = document.getElementById('toast-message');
+                toastMsg.textContent = msg;
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                setTimeout(() => {
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                }, 3500);
+            }
+
+            /* ===================================================
+               1. MIND READING GAME LOGIC (Math Trick Induction)
+               =================================================== */
+            const step1 = document.getElementById('game-step-1');
+            const step2 = document.getElementById('game-step-2');
+            const step3 = document.getElementById('game-step-3');
+            const result = document.getElementById('game-result');
+
+            const btnNext1 = document.getElementById('btn-next-1');
+            const btnNext2 = document.getElementById('btn-next-2');
+            const btnReveal = document.getElementById('btn-reveal');
+            const btnRestartGame = document.getElementById('btn-restart-game');
+
+            const symbolsGrid = document.getElementById('symbols-grid');
+            const revealedSymbol = document.getElementById('revealed-symbol');
+
+            const symbolsList = ['🔮', '☕', '🍵', '🕊️', '👁️', '🎭', '♟️', '🗝️', '📜', '🔍', '🌹', '🎩', '💎', '⭐'];
+            let currentTargetSymbol = '☕';
+
+            function generateSymbolsTable() {
+                symbolsGrid.innerHTML = '';
+                // Pick a random symbol for multiples of 9
+                currentTargetSymbol = symbolsList[Math.floor(Math.random() * symbolsList.length)];
+                
+                for (let i = 0; i <= 99; i++) {
+                    let sym;
+                    if (i % 9 === 0 && i !== 0) {
+                        sym = currentTargetSymbol;
+                    } else {
+                        // Pick random symbol except target symbol to make it look legit
+                        const otherSymbols = symbolsList.filter(s => s !== currentTargetSymbol);
+                        sym = otherSymbols[Math.floor(Math.random() * otherSymbols.length)];
+                    }
+
+                    const item = document.createElement('div');
+                    item.className = 'flex items-center justify-between p-1.5 bg-pink-900/30 rounded border border-pink-800/30 text-pink-200';
+                    item.innerHTML = `<span class="font-bold text-pink-400">${i}</span><span>${sym}</span>`;
+                    symbolsGrid.appendChild(item);
+                }
+            }
+
+            btnNext1.addEventListener('click', () => {
+                step1.classList.add('hidden');
+                step2.classList.remove('hidden');
+            });
+
+            btnNext2.addEventListener('click', () => {
+                generateSymbolsTable();
+                step2.classList.add('hidden');
+                step3.classList.remove('hidden');
+            });
+
+            btnReveal.addEventListener('click', () => {
+                btnReveal.disabled = true;
+                btnReveal.innerHTML = `<i class="fa-solid fa-spinner animate-spin mr-2"></i> Lendo microexpressões...`;
+                
+                setTimeout(() => {
+                    revealedSymbol.textContent = currentTargetSymbol;
+                    step3.classList.add('hidden');
+                    result.classList.remove('hidden');
+                    btnReveal.disabled = false;
+                    btnReveal.innerHTML = `<i class="fa-solid fa-eye mr-2"></i> Patrick Jane, leia minha mente!`;
+                    showToast("Patrick Jane acabou de ler seus pensamentos!");
+                }, 1800);
+            });
+
+            btnRestartGame.addEventListener('click', () => {
+                result.classList.add('hidden');
+                step1.classList.remove('hidden');
+            });
+
+            /* ===================================================
+               2. RED JOHN SUSPECTS WIDGET
+               =================================================== */
+            const suspects = [
+                { name: "Gale Bertram", role: "Diretor da CBI", isRJ: false },
+                { name: "Bret Stiles", role: "Líder da Visualiza", isRJ: false },
+                { name: "Reede Smith", role: "Agente do FBI", isRJ: false },
+                { name: "Ray Haffner", role: "Ex-Agente da CBI / Segurança", isRJ: false },
+                { name: "Sheriff Thomas McAllister", role: "Xerife do Condado de Napa", isRJ: true },
+                { name: "Bob Kirkland", role: "Agente da Segurança Nacional", isRJ: false },
+                { name: "Brett Partridge", role: "Forense da CBI", isRJ: false }
+            ];
+
+            const suspectsContainer = document.getElementById('suspects-container');
+            suspects.forEach(s => {
+                const el = document.createElement('div');
+                el.className = 'glass-card p-3 rounded-xl flex items-center justify-between border border-pink-500/10 hover:border-pink-500/40 transition-all cursor-pointer group';
+                el.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-lg bg-pink-950 flex items-center justify-center text-pink-400 text-xs font-bold">
+                            <i class="fa-solid fa-user-secret"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-semibold text-white group-hover:text-pink-300 transition-colors">${s.name}</h4>
+                            <p class="text-[11px] text-pink-200/60">${s.role}</p>
+                        </div>
+                    </div>
+                    <span class="text-[10px] text-pink-400 uppercase font-semibold px-2 py-0.5 rounded bg-pink-900/30 border border-pink-800/40">Verificar</span>
+                `;
+                el.addEventListener('click', () => {
+                    if (s.isRJ) {
+                        showToast(`🎯 VERDADEIRO: ${s.name} era o verdadeiro Red John!`);
+                    } else {
+                        showToast(`❌ INCORRETO: ${s.name} era um suspeito, mas não era Red John.`);
+                    }
+                });
+                suspectsContainer.appendChild(el);
+            });
+
+            /* ===================================================
+               3. JANE QUOTES CAROUSEL
+               =================================================== */
+            const quotes = [
+                { text: "Se você parar de tentar controlar tudo e apenas observar, as respostas aparecem sozinhos.", author: "Patrick Jane" },
+                { text: "Chá é o bálsamo para a alma. Ajuda a organizar as ideias quando o caos toma conta.", author: "Patrick Jane" },
+                { text: "A vingança é um veneno que você bebe esperando que a outra pessoa morra.", author: "Teresa Lisbon" },
+                { text: "Não existem videntes. Apenas pessoas que sabem ler outras pessoas muito bem.", author: "Patrick Jane" },
+                { text: "Tyger Tyger, burning bright in the forests of the night...", author: "Red John" }
+            ];
+
+            let currentQuoteIdx = 0;
+            const quoteText = document.getElementById('quote-text');
+            const quoteAuthor = document.getElementById('quote-author');
+            const prevQuoteBtn = document.getElementById('prev-quote');
+            const nextQuoteBtn = document.getElementById('next-quote');
+
+            function updateQuote() {
+                quoteText.style.opacity = '0';
+                setTimeout(() => {
+                    quoteText.textContent = `"${quotes[currentQuoteIdx].text}"`;
+                    quoteAuthor.textContent = `— ${quotes[currentQuoteIdx].author}`;
+                    quoteText.style.opacity = '1';
+                }, 200);
+            }
+
+            prevQuoteBtn.addEventListener('click', () => {
+                currentQuoteIdx = (currentQuoteIdx - 1 + quotes.length) % quotes.length;
+                updateQuote();
+            });
+
+            nextQuoteBtn.addEventListener('click', () => {
+                currentQuoteIdx = (currentQuoteIdx + 1) % quotes.length;
+                updateQuote();
+            });
+
+            /* ===================================================
+               4. TRIVIA QUIZ LOGIC
+               =================================================== */
+            const quizQuestions = [
+                {
+                    question: "Qual é a bebida favorita de Patrick Jane que ele prepara em quase todas as cenas de crime?",
+                    options: ["Café Expresso", "Chá Quente", "Vinho Encarnado", "Suco de Laranja"],
+                    correct: 1
+                },
+                {
+                    question: "Qual era a profissão de Patrick Jane antes de ingressar na CBI?",
+                    options: ["Detetive Particular", "Médico Psiquiatra", "Falso Psíquico de TV", "Mágico de Palco"],
+                    correct: 2
+                },
+                {
+                    question: "Qual é o nome da organização de investigação policial onde a equipe trabalha nas primeiras temporadas?",
+                    options: ["FBI", "CBI (California Bureau of Investigation)", "LAPD", "NCIS"],
+                    correct: 1
+                },
+                {
+                    question: "Qual é o poema de William Blake associado aos cúmplices de Red John?",
+                    options: ["The Raven", "Tyger Tyger", "Ozymandias", "Road Not Taken"],
+                    correct: 1
+                },
+                {
+                    question: "Quem é revelado como o verdadeiro Red John na 6ª temporada?",
+                    options: ["Bret Stiles", "Gale Bertram", "Sheriff Thomas McAllister", "Bob Kirkland"],
+                    correct: 2
+                }
+            ];
+
+            let currentQIndex = 0;
+            let quizScore = 0;
+
+            const quizIntro = document.getElementById('quiz-intro');
+            const quizBody = document.getElementById('quiz-body');
+            const quizResults = document.getElementById('quiz-results');
+
+            const btnStartQuiz = document.getElementById('btn-start-quiz');
+            const btnRestartQuiz = document.getElementById('btn-restart-quiz');
+
+            const quizProgress = document.getElementById('quiz-progress');
+            const quizScoreLive = document.getElementById('quiz-score-live');
+            const quizQuestion = document.getElementById('quiz-question');
+            const quizOptions = document.getElementById('quiz-options');
+
+            const quizScoreText = document.getElementById('quiz-score-text');
+            const quizFeedback = document.getElementById('quiz-feedback');
+
+            btnStartQuiz.addEventListener('click', startQuiz);
+            btnRestartQuiz.addEventListener('click', startQuiz);
+
+            function startQuiz() {
+                currentQIndex = 0;
+                quizScore = 0;
+                quizIntro.classList.add('hidden');
+                quizResults.classList.add('hidden');
+                quizBody.classList.remove('hidden');
+                loadQuestion();
+            }
+
+            function loadQuestion() {
+                const q = quizQuestions[currentQIndex];
+                quizProgress.textContent = `Pergunta ${currentQIndex + 1} de ${quizQuestions.length}`;
+                quizScoreLive.textContent = `Pontos: ${quizScore}`;
+                quizQuestion.textContent = q.question;
+
+                quizOptions.innerHTML = '';
+                q.options.forEach((opt, idx) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'w-full text-left p-4 rounded-xl glass-card border border-pink-500/20 hover:border-pink-400 hover:bg-pink-900/30 text-white font-medium transition-all text-sm flex items-center justify-between group';
+                    btn.innerHTML = `
+                        <span>${opt}</span>
+                        <i class="fa-solid fa-chevron-right text-pink-400 opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                    `;
+                    btn.addEventListener('click', () => handleAnswer(idx));
+                    quizOptions.appendChild(btn);
+                });
+            }
+
+            function handleAnswer(selectedIdx) {
+                const q = quizQuestions[currentQIndex];
+                if (selectedIdx === q.correct) {
+                    quizScore++;
+                    showToast("✨ Correto! Excelente dedução!");
+                } else {
+                    showToast(`❌ Errado. A resposta certa era: ${q.options[q.correct]}`);
+                }
+
+                currentQIndex++;
+                if (currentQIndex < quizQuestions.length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            }
+
+            function showResults() {
+                quizBody.classList.add('hidden');
+                quizResults.classList.remove('hidden');
+
+                quizScoreText.textContent = `Você acertou ${quizScore} de ${quizQuestions.length}!`;
+
+                if (quizScore === 5) {
+                    quizFeedback.textContent = "Genial! Suas habilidades de observação são idênticas às de Patrick Jane!";
+                } else if (quizScore >= 3) {
+                    quizFeedback.textContent = "Muito bom! Teresa Lisbon contrataria você para a equipe da CBI sem pensar duas vezes.";
+                } else {
+                    quizFeedback.textContent = "Parece que você precisa maratonar a série novamente acompanhado de uma boa xícara de chá!";
+                }
+            }
+        });
+    </script>
+</body>
+</html>
